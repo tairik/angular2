@@ -1,6 +1,6 @@
 import scala.language.postfixOps
 
-name := """play-ng"""
+name := """angular2-testtairik"""
 
 version := "0.1-SNAPSHOT"
 
