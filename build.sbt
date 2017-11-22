@@ -70,6 +70,8 @@ lazy val `ui-test` = TaskKey[Unit]("Run UI tests when testing application.")
   if (runUiTests != 0) throw new Exception("UI tests failed!")
 }
 
+herokuAppName in Compile := "angular2-testtairik"
+
 `ui-test` := (`ui-test` dependsOn `ui-dev-build`).value
 
 dist := (dist dependsOn `ui-prod-build`).value
