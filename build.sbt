@@ -37,7 +37,13 @@ if(isWindows){ Process("cmd /c " + script, dir) } else { Process(script, dir) } 
 def uiWasInstalled(implicit dir: File): Boolean = (dir / "node_modules").exists()
 
 def runNpmInstall(implicit dir: File): Int =
-  if (uiWasInstalled) Success else runScript("npm install")
+  if (uiWasInstalled) Success else runScript(
+    if(System.getProperty("os.name").toUpperCase().indexOf("WIN") >= 0) {
+      "cmd /c npm install"
+    } else {
+      "npm install"
+    }
+  )
 
 def ifUiInstalled(task: => Int)(implicit dir: File): Int =
   if (runNpmInstall == Success) task
