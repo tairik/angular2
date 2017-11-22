@@ -1,6 +1,6 @@
 import scala.language.postfixOps
 
-name := """angular2-testtairik"""
+name := """play-ng"""
 
 version := "0.1-SNAPSHOT"
 
@@ -32,7 +32,7 @@ PlayKeys.playRunHooks += baseDirectory.map(UIBuild.apply).value
 val isWindows = System.getProperty("os.name").toLowerCase().contains("win")
 
 def runScript(script: String)(implicit dir: File): Int = {
-if(isWindows){ Process("cmd /c " + script, dir) } else { Process(script, dir) } }!
+  if(isWindows){ Process("cmd /c " + script, dir) } else { Process(script, dir) } }!
 
 def uiWasInstalled(implicit dir: File): Boolean = (dir / "node_modules").exists()
 
@@ -69,8 +69,6 @@ lazy val `ui-test` = TaskKey[Unit]("Run UI tests when testing application.")
   implicit val UIroot = baseDirectory.value / "ui"
   if (runUiTests != 0) throw new Exception("UI tests failed!")
 }
-
-scalacOptions += "-feature"
 
 `ui-test` := (`ui-test` dependsOn `ui-dev-build`).value
 
