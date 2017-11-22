@@ -13,8 +13,7 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
-  guice,
-  "com.typesafe" % "config" % "1.2.1"
+  guice
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
@@ -38,13 +37,7 @@ if(isWindows){ Process("cmd /c " + script, dir) } else { Process(script, dir) } 
 def uiWasInstalled(implicit dir: File): Boolean = (dir / "node_modules").exists()
 
 def runNpmInstall(implicit dir: File): Int =
-  if (uiWasInstalled) Success else runScript(
-    if(System.getProperty("os.name").toUpperCase().indexOf("WIN") >= 0) {
-      "cmd /c npm install"
-    } else {
-      "npm install"
-    }
-  )
+  if (uiWasInstalled) Success else runScript("npm install")
 
 def ifUiInstalled(task: => Int)(implicit dir: File): Int =
   if (runNpmInstall == Success) task
