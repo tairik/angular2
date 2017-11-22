@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/angular2-testtairik -Dhttp.port=$PORT
+web: target/universal/stage/bin/angular2-testtairik
